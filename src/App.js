@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import "./App.css";
 
 // Imports dos dados
-import { INSTITUTION_LOGOS } from "./data/institutions.js";
+// (InstitutionLogos usado indiretamente via componente)
 
 // Imports dos componentes
 import { Header } from "./components/Header.js";
