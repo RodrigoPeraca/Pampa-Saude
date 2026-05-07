@@ -18,6 +18,26 @@
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
   box-shadow: 0 20px 50px rgba(5, 46, 43, 0.35);
+  position: relative; /* Para posicionar a logo absoluta */
+}
+/* LOGO/ PET Saúde */
+.pet-saude-logo {
+  position: absolute;
+  top: 22px;      /* sobe/desce */
+  right: 230px;    /* esquerda/direita */
+  height: 100px;   /* tamanho */
+  width: auto;
+  object-fit: contain;
+  z-index: 5;
+  opacity: 0.95;
+}
+/* opcional: em telas pequenas, diminuir a logo */
+@media (max-width: 768px) {
+  .pet-saude-logo {
+    height: 54px;
+    top: 16px;
+    right: 16px;
+  }
 }
 
 .hero-content {
@@ -66,7 +86,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   text-align: center;
+
 }
+
 
 .hero-stats div {
   padding: 0.75rem;
@@ -787,7 +809,7 @@
 }
 
 .unipampa-footer::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 4px;

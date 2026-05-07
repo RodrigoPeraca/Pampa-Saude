@@ -36,6 +36,7 @@ export function Header({
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         <div className="hero-title"></div>
+        
         <div className="menu-spacer" />
       </div>
 
@@ -102,6 +103,7 @@ export function Header({
       </div>
 
       <div className="hero-stats">
+        
         <div>
           <strong>{FACILITIES.length}</strong>
           <span>Unidades catalogadas</span>
@@ -115,6 +117,8 @@ export function Header({
           <span>Atendimento SUS</span>
         </div>
       </div>
+      <img className='pet-saude-logo' src='/PetSaude_logo.png'
+          alt="PetSaude" />
     </header>
   );
 }
