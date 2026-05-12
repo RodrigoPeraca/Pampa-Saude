@@ -23,8 +23,8 @@
 /* LOGO/ PET Saúde */
 .pet-saude-logo {
   position: absolute;
-  top: 22px; /* sobe/desce */
-  right: 230px; /* esquerda/direita */
+  top: 10px; /* sobe/desce */
+  right: 10px; /* esquerda/direita */
   height: 100px; /* tamanho */
   width: auto;
   object-fit: contain;
@@ -34,9 +34,9 @@
 /* opcional: em telas pequenas, diminuir a logo */
 @media (max-width: 768px) {
   .pet-saude-logo {
-    height: 54px;
-    top: 16px;
-    right: 16px;
+    height: 200px;
+    top: 10px;
+    right: 10px;
   }
 }
 
