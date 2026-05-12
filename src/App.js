@@ -71,14 +71,12 @@ function App() {
             setSearchTerm={setSearchTerm}
           />
 
-          {!hasFilter && <InstitutionLogos />}
-
-          {!hasFilter && (
-            <InfoTabs
-              activeInfoTab={activeInfoTab}
-              setActiveInfoTab={setActiveInfoTab}
-            />
-          )}
+          <InstitutionLogos />
+          
+          <InfoTabs
+            activeInfoTab={activeInfoTab}
+            setActiveInfoTab={setActiveInfoTab}
+          />
 
           <footer className="app-footer">
             <p>
