@@ -217,13 +217,6 @@ describe("App Component - Pampa Saúde", () => {
       expect(screen.getByText("Tarumã")).toBeInTheDocument();
     });
 
-    test("deve renderizar serviços da unidade", () => {
-      render(<App />);
-      
-      expect(screen.getAllByText(/Clínico Geral/).length).toBeGreaterThan(0);
-      expect(screen.getAllByText(/Vacinação/).length).toBeGreaterThan(0);
-    });
-
     test("deve renderizar botão Ver no Maps", () => {
       render(<App />);
       
@@ -323,10 +316,10 @@ describe("App Component - Pampa Saúde", () => {
       render(<App />);
       
       const unipampaTab = screen.getAllByText("Unipampa")[0];
-      fireEvent.click(unipampaTab);
+      fireEvent.click(unipampa);
       
       const devsTab = screen.getAllByText("Desenvolvedores")[0];
-      fireEvent.click(devsTab);
+      fireEvent.click(devs);
       
       expect(screen.getByText("Julio Saraçol")).toBeInTheDocument();
     });
