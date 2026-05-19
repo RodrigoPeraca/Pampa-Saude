@@ -7,6 +7,8 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "firebase": "^12.13.0",
+    "lucide-react": "^1.8.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-scripts": "5.0.1",
@@ -35,5 +37,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.10.20"
+  },
+  "REACT_APP_FCM_VAPID_KEY": "BHxdpDCn4SctyV4pX841EO4Ao3VNiHbeIz8Mj260XF68-Zn-SKJa2frlrLKgnL7eJKxjstx1Pl4KVLDaVmpWiWc"
 }

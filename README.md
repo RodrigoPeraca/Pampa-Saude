@@ -28,8 +28,8 @@ Uma aplicação web progressiva (PWA) desenvolvida em React para facilitar o ace
 
 1. Clone o repositório:
    ```bash
-   git clone <url-do-repositorio>
-   cd appjulio
+   git clone https://github.com/RodrigoPeraca/Pampa-Sa-de.git
+   cd Pampa-Sa-de
    ```
 
 2. Instale as dependências:
@@ -76,19 +76,31 @@ serve -s build
 ```bash
 npm test
 ```
+Para testas todas as funcionalidades apenas
+
+```bash
+npm test App.test.js
+```
 
 ## 📁 Estrutura do Projeto
 
 ```
-appjulio/
+Pampa-Sa-de/
 ├── public/
 │   ├── index.html
 │   ├── manifest.json
 │   └── ...
 ├── src/
+│   ├── Components
+│   │    ├── Header.js
+│   │    └── ...
+│   ├── data
+│   │    ├── constants.js
+│   │    └── ...
+│   ├── hooks
+│   │    └── useFacilities.js
 │   ├── App.js
 │   ├── App.css
-│   ├── index.js
 │   └── ...
 ├── build/
 ├── package.json
@@ -97,7 +109,7 @@ appjulio/
 
 ## 🤝 Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+Construido para soluções para a comunidade de bagé e desenvolvido pela equipe Tecnologia 1 do Pampa-Saúde
 
 ## 📄 Licença
 
