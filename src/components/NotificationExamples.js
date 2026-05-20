@@ -50,7 +50,7 @@ export const NotificationStatus = () => {
                 maxWidth: "250px",
               }}
             >
-              {fcmToken.substring(0, 30)}...
+              {fcmToken}
             </code>
           ) : (
             "Não obtido"
