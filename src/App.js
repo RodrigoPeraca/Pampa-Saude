@@ -21,7 +21,6 @@ import { HealthCampaignsPage } from "./components/HealthCampaignsPage.js";
 import { FirstAidPage } from "./components/FirstAidPage.js";
 import { UsefulPhonesPage } from "./components/UsefulPhonesPage.js";
 import { VideosPage } from "./components/VideosPage.js";
-
 // Imports do hook
 import { useFacilities } from "./hooks/useFacilities.js";
 

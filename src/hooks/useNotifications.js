@@ -9,6 +9,7 @@ import {
   sendTokenToBackend,
   getStoredFCMToken,
 } from "../services/notificationService";
+import { saveTokenToFirestore } from "../services/notificationService";
 
 export const useNotifications = ({
   onNotificationReceived = null,
@@ -34,6 +35,7 @@ export const useNotifications = ({
         const token = await getFCMToken(vapidKey);
         if (token) {
           setFcmToken(token);
+          console.log("🔔 MEU TOKEN FCM:", token);
           if (sendToBackend && userId) {
             await sendTokenToBackend(userId, token);
           }
@@ -73,7 +75,10 @@ export const useNotifications = ({
         const storedToken = getStoredFCMToken();
 
         if (storedToken) {
-          if (isMounted) setFcmToken(storedToken);
+          if (isMounted){ 
+          setFcmToken(storedToken);
+          console.log("🔔 MEU TOKEN FCM:", storedToken);
+          }
         } else if (autoRequest) {
           const perm = await requestNotificationPermission();
           if (isMounted) {
@@ -82,6 +87,8 @@ export const useNotifications = ({
               const token = await getFCMToken(vapidKey);
               if (token && isMounted) {
                 setFcmToken(token);
+                await saveTokenToFirestore(token);
+                console.log("🔔 MEU TOKEN FCM:", token);
                 if (sendToBackend && userId) {
                   await sendTokenToBackend(userId, token);
                 }

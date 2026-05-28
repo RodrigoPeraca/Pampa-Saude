@@ -17,6 +17,7 @@ Relatorio_*.json
 # misc
 .DS_Store
 .env.local
+.env.example
 .env.development.local
 .env.test.local
 .env.production.local

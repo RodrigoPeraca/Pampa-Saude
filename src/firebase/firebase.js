@@ -3,6 +3,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getMessaging, isSupported } from "firebase/messaging";
+import { getFirestore } from "firebase/firestore";
 
 //Credencial real do firebase do projeto Pampa Saúde 
 const firebaseConfig = {
@@ -26,3 +27,4 @@ if (isSupported()) {
 }
 
 export { app, messaging };
+export const db = getFirestore(app);

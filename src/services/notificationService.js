@@ -1,6 +1,7 @@
 // src/services/notificationService.js
 // Serviço centralizador para Firebase Cloud Messaging
-
+import { db } from "../firebase/firebase";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { messaging } from "../firebase/firebase";
 import {
   getToken,
@@ -218,5 +219,29 @@ export const sendTokenToBackend = async (
   } catch (error) {
     console.error("Erro ao enviar token ao backend:", error);
     throw error;
+  }
+};
+
+//salvar token no Firestore
+export const saveTokenToFirestore = async (token) => {
+  try {
+    // Evita duplicatas — verifica se token já existe
+    const q = query(
+      collection(db, "fcm_tokens"),
+      where("token", "==", token)
+    );
+    const existing = await getDocs(q);
+    if (!existing.empty) return; // já salvo, ignora
+
+    await addDoc(collection(db, "fcm_tokens"), {
+      token,
+      platform: "web",
+      createdAt: new Date(),
+      active: true,
+    });
+
+    console.log("Token salvo no Firestore");
+  } catch (error) {
+    console.error("Erro ao salvar token:", error);
   }
 };

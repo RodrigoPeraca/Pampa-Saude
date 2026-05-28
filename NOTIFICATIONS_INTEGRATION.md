@@ -461,9 +461,9 @@ Se encontrar problemas:
 
 ## ✅ Checklist de Produção
 
-- [ ] Variáveis de ambiente configuradas
-- [ ] Firebase Project criado e ativo
-- [ ] Service Worker registrado
+- [X] Variáveis de ambiente configuradas
+- [X] Firebase Project criado e ativo
+- [X] Service Worker registrado
 - [ ] Testado em múltiplos navegadores
 - [ ] Backend enviando tokens corretamente
 - [ ] Notificações aparecem em foreground e background
