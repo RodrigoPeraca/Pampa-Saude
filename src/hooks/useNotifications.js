@@ -1,4 +1,3 @@
-// src/hooks/useNotifications.js
 import { useEffect, useRef, useCallback, useState } from "react";
 import {
   requestNotificationPermission,
@@ -8,8 +7,8 @@ import {
   getNotificationPermission,
   sendTokenToBackend,
   getStoredFCMToken,
+  saveTokenToFirestore,
 } from "../services/notificationService";
-import { saveTokenToFirestore } from "../services/notificationService";
 
 export const useNotifications = ({
   onNotificationReceived = null,
@@ -24,6 +23,12 @@ export const useNotifications = ({
   const [error, setError] = useState(null);
 
   const unsubscribeRef = useRef(null);
+  const onNotificationReceivedRef = useRef(onNotificationReceived);
+
+  // Mantém o ref atualizado sem disparar o efeito
+  useEffect(() => {
+    onNotificationReceivedRef.current = onNotificationReceived;
+  }, [onNotificationReceived]);
 
   const requestPermission = useCallback(async () => {
     setIsLoading(true);
@@ -35,6 +40,7 @@ export const useNotifications = ({
         const token = await getFCMToken(vapidKey);
         if (token) {
           setFcmToken(token);
+          await saveTokenToFirestore(token);
           console.log("🔔 MEU TOKEN FCM:", token);
           if (sendToBackend && userId) {
             await sendTokenToBackend(userId, token);
@@ -75,10 +81,10 @@ export const useNotifications = ({
         const storedToken = getStoredFCMToken();
 
         if (storedToken) {
-          if (isMounted){ 
-          setFcmToken(storedToken);
-          await saveTokenToFirestore(storedToken);
-          console.log("🔔 MEU TOKEN FCM:", storedToken);
+          if (isMounted) {
+            setFcmToken(storedToken);
+            await saveTokenToFirestore(storedToken);
+            console.log("🔔 MEU TOKEN FCM:", storedToken);
           }
         } else if (autoRequest) {
           const perm = await requestNotificationPermission();
@@ -98,8 +104,9 @@ export const useNotifications = ({
           }
         }
 
-        if (onNotificationReceived) {
-          const unsubscribe = onMessageListener(onNotificationReceived);
+        // Usa o ref em vez da função diretamente
+        if (onNotificationReceivedRef.current) {
+          const unsubscribe = onMessageListener(onNotificationReceivedRef.current);
           unsubscribeRef.current = unsubscribe;
         }
       } catch (err) {
@@ -114,9 +121,9 @@ export const useNotifications = ({
 
     return () => {
       isMounted = false;
-      cleanup(); // só cancela o listener
+      cleanup();
     };
-  }, [autoRequest, onNotificationReceived, vapidKey, userId, sendToBackend, cleanup]);
+  }, [autoRequest, vapidKey, userId, sendToBackend, cleanup]); // onNotificationReceived removido das dependências
 
   return {
     fcmToken,
