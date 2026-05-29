@@ -1,17 +1,20 @@
 const admin = require("firebase-admin");
 
 if (!admin.apps.length) {
+  const privateKey = Buffer.from(
+    process.env.FIREBASE_PRIVATE_KEY_BASE64, "base64"
+  ).toString("utf8");
+
   admin.initializeApp({
     credential: admin.credential.cert({
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      privateKey,
     }),
   });
 }
 
 module.exports = async (req, res) => {
-  // Só aceita POST
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -25,7 +28,6 @@ module.exports = async (req, res) => {
   try {
     const db = admin.firestore();
 
-    // Busca todos os tokens ativos
     const snapshot = await db
       .collection("fcm_tokens")
       .where("active", "==", true)
@@ -40,7 +42,6 @@ module.exports = async (req, res) => {
       return res.status(200).json({ message: "Nenhum token ativo encontrado" });
     }
 
-    // Dispara para todos os tokens
     const messages = tokens.map(({ token }) => ({
       token,
       notification: { title, body },
@@ -48,7 +49,6 @@ module.exports = async (req, res) => {
 
     const response = await admin.messaging().sendEach(messages);
 
-    // Marca tokens inválidos como inactive
     const batch = db.batch();
     response.responses.forEach((resp, index) => {
       if (!resp.success) {
