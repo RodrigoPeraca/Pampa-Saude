@@ -222,16 +222,24 @@ export const sendTokenToBackend = async (
   }
 };
 
-//salvar token no Firestore
+// Flag para evitar chamadas simultâneas
+let isSavingToken = false;
+
 export const saveTokenToFirestore = async (token) => {
+  // Se já está salvando, ignora
+  if (isSavingToken) return;
+  isSavingToken = true;
+
   try {
-    // Evita duplicatas — verifica se token já existe
     const q = query(
       collection(db, "fcm_tokens"),
       where("token", "==", token)
     );
     const existing = await getDocs(q);
-    if (!existing.empty) return; // já salvo, ignora
+    if (!existing.empty) {
+      console.log("Token já existe no Firestore, ignorando...");
+      return;
+    }
 
     await addDoc(collection(db, "fcm_tokens"), {
       token,
@@ -243,5 +251,7 @@ export const saveTokenToFirestore = async (token) => {
     console.log("Token salvo no Firestore");
   } catch (error) {
     console.error("Erro ao salvar token:", error);
+  } finally {
+    isSavingToken = false;
   }
 };
