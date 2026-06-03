@@ -8,7 +8,7 @@ export const FACILITIES = [
     type: "ESF",
     neighborhood: "Tarumã",
     address: "Rua Pompilio Nunes,275 - Tarumã, Bagé - RS",
-    hours: "Seg a Sex · 13h30 às 17h30",
+    hours: "Seg a Sex · 7h30 às 13h30, 13h30 às 17h30",
     phone: "(53) 3241-1588",
     services: [
       "Clinico Geral",
@@ -30,7 +30,7 @@ export const FACILITIES = [
     type: "ESF",
     neighborhood: "Pedras Brancas",
     address: "Rua General Osório, 215 - bairro Pedras Brancas, Bagé - RS",
-    hours: "Seg a Sex · 8h às 18h",
+    hours: "Seg a Sex · 7h30 às 13h30, 13h30 às 17h30",
     phone: "(53) 3241-0042",
     services: [
       "Clinico Geral",
@@ -303,7 +303,7 @@ export const FACILITIES = [
     type: "UBS",
     neighborhood: "São Jorge",
     address: "Av. Tupi Silveira, 141 - São Jorge, Bagé - RS",
-    hours: "Seg a Sex · 7h30 às 16h45",
+    hours: "Seg a Sex · 7h30 às 12h, 13h30 às 17h",
     phone: "(53) 3241-1552",
     services: [
       "Clinico Geral",

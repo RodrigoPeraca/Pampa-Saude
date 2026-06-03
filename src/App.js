@@ -21,6 +21,7 @@ import { HealthCampaignsPage } from "./components/HealthCampaignsPage.js";
 import { FirstAidPage } from "./components/FirstAidPage.js";
 import { UsefulPhonesPage } from "./components/UsefulPhonesPage.js";
 import { VideosPage } from "./components/VideosPage.js";
+import Pharmacy from "./components/Pharmacy.js";
 // Imports do hook
 import { useFacilities } from "./hooks/useFacilities.js";
 // Import page
@@ -109,6 +110,8 @@ function AppContent({
         <FirstAidPage setActivePage={setActivePage} />
       ) : activePage === "telefones" ? (
         <UsefulPhonesPage setActivePage={setActivePage} />
+      ) : activePage === "farmacias" ? (
+        <Pharmacy />
       ) : activePage === "videos" ? (
         <VideosPage setActivePage={setActivePage} />
       ) : activePage === "mensagem" ? (
