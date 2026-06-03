@@ -23,7 +23,13 @@ const app = initializeApp(firebaseConfig);
 let messaging = null;
 
 if (isSupported()) {
+  const app = initializeApp(firebaseConfig);
   messaging = getMessaging(app);
+
+  // Força usar o service-worker.js em vez do firebase-messaging-sw.js
+  navigator.serviceWorker.register("/service-worker.js").then((registration) => {
+    messaging.useServiceWorker && messaging.useServiceWorker(registration);
+  });
 }
 
 export { app, messaging };

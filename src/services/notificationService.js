@@ -158,16 +158,6 @@ export const onMessageListener = (onMessageReceived) => {
       if (onMessageReceived) {
         onMessageReceived(notificationData);
       }
-
-      // Exibe notificação visual se permitido
-      if (isNotificationPermissionGranted()) {
-        new Notification(notificationData.title, {
-          body: notificationData.body,
-          icon: notificationData.icon || notificationData.image,
-          image: notificationData.image,
-          tag: "foreground-notification",
-        });
-      }
     });
   } catch (error) {
     console.error("Erro ao configurar listener de mensagens:", error);

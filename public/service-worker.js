@@ -82,3 +82,30 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+// Importa o Firebase para notificações em background
+importScripts("https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA_BZSRZFImnVwogdFvkdbufcIEKMjLYBY",
+  authDomain: "pampa-saude.firebaseapp.com",
+  projectId: "pampa-saude",
+  storageBucket: "pampa-saude.firebasestorage.app",
+  messagingSenderId: "403037160519",
+  appId: "1:403037160519:web:b072da322c05bf61631d62",
+};
+
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage((payload) => {
+  const notificationTitle = payload.notification?.title || "Pampa Saúde";
+  const notificationOptions = {
+    body: payload.notification?.body || "",
+    icon: "/icon-192x192.png",
+    badge: "/badge-72x72.png",
+    tag: "pampa-saude-notification",
+  };
+
+  return self.registration.showNotification(notificationTitle, notificationOptions);
+});
