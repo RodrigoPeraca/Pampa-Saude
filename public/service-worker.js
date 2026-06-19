@@ -1,24 +1,24 @@
 /* eslint-disable no-restricted-globals */
 
-const CACHE_NAME = 'appjulio-v2';
-const OFFLINE_URL = '/index.html';
+const CACHE_NAME = "pampa-saude";
+const OFFLINE_URL = "/index.html";
 
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
-        '/',
+        "/",
         OFFLINE_URL,
-        '/manifest.json',
-        '/PampaSaude_redondo_192.png',
-        '/PampaSaude_redondo.png',
+        "/manifest.json",
+        "/PampaSaude_redondo_192.png",
+        "/PampaSaude_redondo.png",
       ]);
-    })
+    }),
   );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -27,36 +27,36 @@ self.addEventListener('activate', (event) => {
             return caches.delete(cacheName);
           }
           return null;
-        })
+        }),
       );
-    })
+    }),
   );
   self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') {
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") {
     return;
   }
 
   const requestUrl = new URL(event.request.url);
   const isSameOrigin = requestUrl.origin === location.origin;
 
-  // Serve shell para navegação
-  if (event.request.mode === 'navigate') {
+  if (event.request.mode === "navigate") {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          caches
+            .open(CACHE_NAME)
+            .then((cache) => cache.put(event.request, responseClone));
           return response;
         })
-        .catch(() => caches.match(OFFLINE_URL))
+        .catch(() => caches.match(OFFLINE_URL)),
     );
     return;
   }
 
-  // Fallback para requests de recursos no mesmo domínio
   if (isSameOrigin) {
     event.respondWith(
       caches.match(event.request).then((cachedResponse) => {
@@ -69,30 +69,41 @@ self.addEventListener('fetch', (event) => {
               return networkResponse;
             }
             const cloned = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
+            caches
+              .open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, cloned));
             return networkResponse;
           })
           .catch(() => {
-            if (event.request.destination === 'document') {
+            if (event.request.destination === "document") {
               return caches.match(OFFLINE_URL);
             }
-            return new Response('Offline', { status: 503, statusText: 'Offline' });
+            return new Response("Offline", {
+              status: 503,
+              statusText: "Offline",
+            });
           });
-      })
+      }),
     );
   }
 });
-// Importa o Firebase para notificações em background
-importScripts("https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js");
 
+// Importa o Firebase para notificações em background
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js",
+);
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js",
+);
+
+// Valores fixos — service workers não têm acesso a process.env
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyA_BZSRZFImnVwogdFvkdbufcIEKMjLYBY",
+  authDomain: "pampa-saude.firebaseapp.com",
+  projectId: "pampa-saude",
+  storageBucket: "pampa-saude.firebasestorage.app",
+  messagingSenderId: "403037160519",
+  appId: "1:403037160519:web:b072da322c05bf61631d62",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -107,5 +118,8 @@ messaging.onBackgroundMessage((payload) => {
     tag: "pampa-saude-notification",
   };
 
-  return self.registration.showNotification(notificationTitle, notificationOptions);
+  return self.registration.showNotification(
+    notificationTitle,
+    notificationOptions,
+  );
 });
