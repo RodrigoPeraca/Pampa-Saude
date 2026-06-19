@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, isSupported } from "firebase/messaging";
 import { getFirestore } from "firebase/firestore";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+  getToken as getAppCheckToken,
+} from "firebase/app-check";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
