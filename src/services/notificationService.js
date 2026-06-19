@@ -1,8 +1,6 @@
 // src/services/notificationService.js
 // Serviço centralizador para Firebase Cloud Messaging
 import {
-  db,
-  appCheckReady,
   collection,
   addDoc,
   query,
@@ -10,7 +8,7 @@ import {
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
-import { messaging } from "../firebase/firebase";
+import { messaging, db, appCheckReady } from "../firebase/firebase";
 import { getToken, onMessage, isSupported } from "firebase/messaging";
 
 // Constante para chave localStorage
