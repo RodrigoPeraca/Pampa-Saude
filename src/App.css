@@ -562,7 +562,24 @@
 .services-page h2 {
   margin: 0.5rem 0 0.25rem;
 }
+.side-menu-notification-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  padding: 12px 16px;
+  color: inherit;
+}
 
+.side-menu-notification-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .back-button {
   border: none;
   background: transparent;
@@ -1224,7 +1241,7 @@
 .ps-em-badge.green {
   background: #16a34a;
 }
-.ps-em-badge.cyan{
+.ps-em-badge.cyan {
   background: #0891b2;
 }
 .ps-em-badge.teal {
@@ -1356,7 +1373,7 @@
   background-color: white;
   color: #0b3b2e;
   cursor: pointer;
-  appearance: auto; 
+  appearance: auto;
 }
 
 .pharmacy-container .search-panel input {
