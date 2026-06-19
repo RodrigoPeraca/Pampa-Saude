@@ -18,6 +18,7 @@ import {
   BellOff,
 } from "lucide-react";
 import { FACILITIES } from "../data/facilities.js";
+import { useNotificationContext } from "./NotificationProvider.js";
 
 export function Header({
   isMenuOpen,
