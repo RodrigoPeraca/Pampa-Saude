@@ -8,6 +8,7 @@ import {
   onMessage,
   isSupported,
 } from "firebase/messaging";
+import { collection, addDoc, query, where, getDocs, deleteDoc } from "firebase/firestore";
 
 // Constante para chave localStorage
 const FCM_TOKEN_KEY = "fcm_token";
@@ -215,7 +216,7 @@ export const sendTokenToBackend = async (
 // Flag para evitar chamadas simultâneas
 let isSavingToken = false;
 
-export const saveTokenToFirestore = async (token) => {
+export const saveTokenToFirestore = async (token) => { 
   // Se já está salvando, ignora
   if (isSavingToken) return;
   isSavingToken = true;
@@ -235,7 +236,6 @@ export const saveTokenToFirestore = async (token) => {
       token,
       platform: "web",
       createdAt: new Date(),
-      active: true,
     });
 
     console.log("Token salvo no Firestore");
@@ -244,4 +244,33 @@ export const saveTokenToFirestore = async (token) => {
   } finally {
     isSavingToken = false;
   }
+};
+
+export const disableNotifications = async () => {
+  try {
+    const token = getStoredFCMToken();
+    if (!token) return;
+
+    // Remove do Firestore
+    const q = query(collection(db, "fcm_tokens"), where("token", "==", token));
+    const snapshot = await getDocs(q);
+    
+    const deletions = [];
+    snapshot.forEach((docSnap) => {
+      deletions.push(deleteDoc(docSnap.ref));
+    });
+    await Promise.all(deletions);
+
+    // Limpa localStorage e localmente
+    clearFCMToken();
+    localStorage.setItem("notifications_enabled", "false");
+
+    console.log("Notificações desativadas e token removido");
+  } catch (error) {
+    console.error("Erro ao desativar notificações:", error);
+  }
+};
+
+export const getNotificationsEnabledPreference = () => {
+  return localStorage.getItem("notifications_enabled") !== "false";
 };

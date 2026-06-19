@@ -124,6 +124,27 @@ export const useNotifications = ({
     };
   }, [autoRequest, vapidKey, userId, sendToBackend, cleanup]); // onNotificationReceived removido das dependências
 
+  const [notificationsEnabled, setNotificationsEnabled] = useState(
+  getNotificationsEnabledPreference()
+);
+
+const toggleNotifications = useCallback(async () => {
+  if (notificationsEnabled) {
+    // Desativar: apaga token
+    await disableNotifications();
+    setFcmToken(null);
+    setNotificationsEnabled(false);
+  } else {
+    // Reativar: gera novo token
+    localStorage.setItem("notifications_enabled", "true");
+    setNotificationsEnabled(true);
+    const perm = await requestPermission();
+    if (perm !== "granted") {
+      setNotificationsEnabled(false); // se negar, volta
+    }
+  }
+}, [notificationsEnabled, requestPermission]);
+
   return {
     fcmToken,
     permission,
@@ -134,5 +155,7 @@ export const useNotifications = ({
     cleanupOnLogout,
     isGranted: permission === "granted",
     isDenied: permission === "denied",
+    notificationsEnabled,
+    toggleNotifications,
   };
 };

@@ -27,10 +27,7 @@ module.exports = async (req, res) => {
   try {
     const db = admin.firestore();
 
-    const snapshot = await db
-      .collection("fcm_tokens")
-      .where("active", "==", true)
-      .get();
+    const snapshot = await db.collection("fcm_tokens").get();
 
     const tokens = snapshot.docs.map((doc) => ({
       id: doc.id,
