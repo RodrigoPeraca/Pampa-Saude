@@ -14,6 +14,8 @@ import {
   Phone,
   Video,
   Pill,
+  Bell,
+  BellOff,
 } from "lucide-react";
 import { FACILITIES } from "../data/facilities.js";
 
@@ -26,6 +28,8 @@ export function Header({
   setFilterType,
   totalServices,
 }) {
+  const { isGranted, isDenied, notificationsEnabled, toggleNotifications } =
+    useNotificationContext();
   const handleNavClick = (page) => {
     setActivePage(page);
     if (page === "home") {
