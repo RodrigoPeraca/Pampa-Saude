@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, isSupported } from "firebase/messaging";
 import { getFirestore } from "firebase/firestore";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -13,6 +14,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+// Inicializa o App Check
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(process.env.REACT_APP_RECAPTCHA_SITE_KEY),
+  isTokenAutoRefreshEnabled: true,
+});
+
 export const db = getFirestore(app);
 
 let messaging = null;
@@ -30,4 +38,4 @@ const initMessaging = async () => {
 
 initMessaging();
 
-export { app, messaging };
+export { app, messaging, appCheck  };
