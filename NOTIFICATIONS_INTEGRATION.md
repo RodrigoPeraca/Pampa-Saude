@@ -464,10 +464,10 @@ Se encontrar problemas:
 - [X] Variáveis de ambiente configuradas
 - [X] Firebase Project criado e ativo
 - [X] Service Worker registrado
-- [ ] Testado em múltiplos navegadores
-- [ ] Backend enviando tokens corretamente
-- [ ] Notificações aparecem em foreground e background
-- [ ] PWA funciona com notificações
-- [ ] Chaves privadas não estão no repositório
+- [X] Testado em múltiplos navegadores
+- [X] Backend enviando tokens corretamente
+- [X] Notificações aparecem em foreground e background
+- [!] PWA funciona com notificações !precisa de ajustes ainda!
+- [X] Chaves privadas não estão no repositório
 - [ ] Tratamento de erros implementado
 - [ ] Monitoramento de erros configurado (Sentry, LogRocket, etc)
