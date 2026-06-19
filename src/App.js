@@ -98,6 +98,8 @@ function AppContent({
           setFilterType={setFilterType}
           setActivePage={setActivePage}
         />
+      ) : activePage === "farmacias" ? (
+        <Pharmacy setActivePage={setActivePage} />
       ) : activePage === "foreigners" ? (
         <ForeignersPage setActivePage={setActivePage} />
       ) : activePage === "sobre" ? (
