@@ -22,6 +22,14 @@ const appCheck = initializeAppCheck(app, {
 });
 
 export const db = getFirestore(app);
+// aguarda o App Check estar pronto antes de usar o Firestore
+export const appCheckReady = getAppCheckToken(appCheck)
+  .then(() => {
+    console.log("App Check pronto");
+  })
+  .catch((err) => {
+    console.error("Erro ao obter token do App Check:", err);
+  });
 
 let messaging = null;
 
@@ -38,4 +46,4 @@ const initMessaging = async () => {
 
 initMessaging();
 
-export { app, messaging, appCheck  };
+export { app, messaging, appCheck };
