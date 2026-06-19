@@ -8,6 +8,8 @@ import {
   sendTokenToBackend,
   getStoredFCMToken,
   saveTokenToFirestore,
+  disableNotifications,
+  getNotificationsEnabledPreference,
 } from "../services/notificationService";
 
 export const useNotifications = ({
@@ -21,6 +23,9 @@ export const useNotifications = ({
   const [permission, setPermission] = useState(getNotificationPermission());
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(
+    getNotificationsEnabledPreference()
+  );
 
   const unsubscribeRef = useRef(null);
   const onNotificationReceivedRef = useRef(onNotificationReceived);
@@ -72,6 +77,23 @@ export const useNotifications = ({
     setFcmToken(null);
   }, [cleanup]);
 
+  const toggleNotifications = useCallback(async () => {
+    if (notificationsEnabled) {
+      // Desativar: apaga token
+      await disableNotifications();
+      setFcmToken(null);
+      setNotificationsEnabled(false);
+    } else {
+      // Reativar: gera novo token
+      localStorage.setItem("notifications_enabled", "true");
+      setNotificationsEnabled(true);
+      const perm = await requestPermission();
+      if (perm !== "granted") {
+        setNotificationsEnabled(false); // se negar, volta
+      }
+    }
+  }, [notificationsEnabled, requestPermission]);
+
   useEffect(() => {
     let isMounted = true;
 
@@ -81,10 +103,9 @@ export const useNotifications = ({
         const storedToken = getStoredFCMToken();
 
         if (storedToken) {
-          if (isMounted){ 
-          setFcmToken(storedToken);
-          await saveTokenToFirestore(storedToken);
-          console.log("🔔 MEU TOKEN FCM:", storedToken);
+          if (isMounted) {
+            setFcmToken(storedToken);
+            console.log("🔔 MEU TOKEN FCM:", storedToken);
           }
         } else if (autoRequest) {
           const perm = await requestNotificationPermission();
@@ -123,28 +144,7 @@ export const useNotifications = ({
       isMounted = false;
       cleanup();
     };
-  }, [autoRequest, vapidKey, userId, sendToBackend, cleanup]); // onNotificationReceived removido das dependências
-
-  const [notificationsEnabled, setNotificationsEnabled] = useState(
-  getNotificationsEnabledPreference()
-);
-
-const toggleNotifications = useCallback(async () => {
-  if (notificationsEnabled) {
-    // Desativar: apaga token
-    await disableNotifications();
-    setFcmToken(null);
-    setNotificationsEnabled(false);
-  } else {
-    // Reativar: gera novo token
-    localStorage.setItem("notifications_enabled", "true");
-    setNotificationsEnabled(true);
-    const perm = await requestPermission();
-    if (perm !== "granted") {
-      setNotificationsEnabled(false); // se negar, volta
-    }
-  }
-}, [notificationsEnabled, requestPermission]);
+  }, [autoRequest, vapidKey, userId, sendToBackend, cleanup]);
 
   return {
     fcmToken,

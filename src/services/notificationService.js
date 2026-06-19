@@ -1,14 +1,13 @@
 // src/services/notificationService.js
 // Serviço centralizador para Firebase Cloud Messaging
 import { db } from "../firebase/firebase";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, deleteDoc } from "firebase/firestore";
 import { messaging } from "../firebase/firebase";
 import {
   getToken,
   onMessage,
   isSupported,
 } from "firebase/messaging";
-import { collection, addDoc, query, where, getDocs, deleteDoc } from "firebase/firestore";
 
 // Constante para chave localStorage
 const FCM_TOKEN_KEY = "fcm_token";
