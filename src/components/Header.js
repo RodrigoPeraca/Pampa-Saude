@@ -2,7 +2,19 @@
 // Componente de cabeçalho (hero) do aplicativo
 
 import React from "react";
-import { Menu, X, Home, Hospital, Info, Globe, Heart, Stethoscope, Phone, Video, Pill } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Hospital,
+  Info,
+  Globe,
+  Heart,
+  Stethoscope,
+  Phone,
+  Video,
+  Pill,
+} from "lucide-react";
 import { FACILITIES } from "../data/facilities.js";
 
 export function Header({
@@ -104,6 +116,26 @@ export function Header({
             <Info size={18} />
             <span>Sobre o Pampa Saúde</span>
           </a>
+          <button
+            type="button"
+            className="side-menu-notification-toggle"
+            onClick={toggleNotifications}
+            disabled={isDenied}
+          >
+            {notificationsEnabled && isGranted ? (
+              <>
+                <Bell size={18} />
+                <span>Notificações Ativas</span>
+              </>
+            ) : (
+              <>
+                <BellOff size={18} />
+                <span>
+                  {isDenied ? "Notificações Bloqueadas" : "Ativar Notificações"}
+                </span>
+              </>
+            )}
+          </button>
         </nav>
       </aside>
 
