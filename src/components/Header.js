@@ -39,7 +39,7 @@ export function Header({
     }
     setIsMenuOpen(false);
   };
-
+  
   return (
     <header className="hero">
       <div className="hero-topbar">

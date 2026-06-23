@@ -1,5 +1,6 @@
 // src/components/NotificationProvider.js
 // Context Provider para gerenciar notificações push em toda aplicação
+// Fornece estado e funções para lidar com permissões, histórico e exibição de notificações
 
 import React, { createContext, useContext, useState, useCallback } from "react";
 import { useNotifications } from "../hooks/useNotifications";
@@ -32,6 +33,9 @@ export const NotificationProvider = ({
     requestPermission,
     cleanup,
     isGranted,
+    isDenied,              
+    notificationsEnabled,  
+    toggleNotifications,
   } = useNotifications({
     onNotificationReceived: (notifData) => {
       // Adiciona à lista de notificações
@@ -83,6 +87,9 @@ export const NotificationProvider = ({
     isLoading,
     error,
     isGranted,
+    isDenied,             
+    notificationsEnabled, 
+    toggleNotifications,
     requestPermission,
     cleanup,
     notifications,
