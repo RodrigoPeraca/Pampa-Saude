@@ -39,8 +39,7 @@ export function Header({
     }
     setIsMenuOpen(false);
   };
-  const { isGranted, isDenied, notificationsEnabled, toggleNotifications } = useNotificationContext();
-
+  
   return (
     <header className="hero">
       <div className="hero-topbar">
