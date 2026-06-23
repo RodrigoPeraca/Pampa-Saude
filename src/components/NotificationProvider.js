@@ -32,6 +32,9 @@ export const NotificationProvider = ({
     requestPermission,
     cleanup,
     isGranted,
+    isDenied,              
+    notificationsEnabled,  
+    toggleNotifications,
   } = useNotifications({
     onNotificationReceived: (notifData) => {
       // Adiciona à lista de notificações
@@ -83,6 +86,9 @@ export const NotificationProvider = ({
     isLoading,
     error,
     isGranted,
+    isDenied,             
+    notificationsEnabled, 
+    toggleNotifications,
     requestPermission,
     cleanup,
     notifications,
