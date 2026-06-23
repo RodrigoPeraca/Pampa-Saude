@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, isSupported } from "firebase/messaging";
 import { getFirestore } from "firebase/firestore";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+  getToken as getAppCheckToken,
+} from "firebase/app-check";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,6 +19,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+window.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 // Inicializa o App Check
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider(process.env.REACT_APP_RECAPTCHA_SITE_KEY),
@@ -22,6 +27,14 @@ const appCheck = initializeAppCheck(app, {
 });
 
 export const db = getFirestore(app);
+// aguarda o App Check estar pronto antes de usar o Firestore
+export const appCheckReady = getAppCheckToken(appCheck)
+  .then(() => {
+    console.log("App Check pronto");
+  })
+  .catch((err) => {
+    console.error("Erro ao obter token do App Check:", err);
+  });
 
 let messaging = null;
 
@@ -38,4 +51,4 @@ const initMessaging = async () => {
 
 initMessaging();
 
-export { app, messaging, appCheck  };
+export { app, messaging, appCheck };

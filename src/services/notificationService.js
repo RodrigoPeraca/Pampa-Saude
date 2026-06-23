@@ -1,13 +1,15 @@
 // src/services/notificationService.js
 // Serviço centralizador para Firebase Cloud Messaging
-import { db } from "../firebase/firebase";
-import { collection, addDoc, query, where, getDocs, deleteDoc } from "firebase/firestore";
-import { messaging } from "../firebase/firebase";
 import {
-  getToken,
-  onMessage,
-  isSupported,
-} from "firebase/messaging";
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
+import { messaging, db, appCheckReady } from "../firebase/firebase";
+import { getToken, onMessage, isSupported } from "firebase/messaging";
 
 // Constante para chave localStorage
 const FCM_TOKEN_KEY = "fcm_token";
@@ -184,7 +186,7 @@ export const getNotificationPermission = () => {
 export const sendTokenToBackend = async (
   userId,
   fcmToken,
-  backendUrl = process.env.REACT_APP_API_URL
+  backendUrl = process.env.REACT_APP_API_URL,
 ) => {
   try {
     const response = await fetch(`${backendUrl}/api/fcm-tokens`, {
@@ -215,16 +217,15 @@ export const sendTokenToBackend = async (
 // Flag para evitar chamadas simultâneas
 let isSavingToken = false;
 
-export const saveTokenToFirestore = async (token) => { 
+export const saveTokenToFirestore = async (token) => {
   // Se já está salvando, ignora
   if (isSavingToken) return;
   isSavingToken = true;
 
   try {
-    const q = query(
-      collection(db, "fcm_tokens"),
-      where("token", "==", token)
-    );
+    await appCheckReady;
+
+    const q = query(collection(db, "fcm_tokens"), where("token", "==", token));
     const existing = await getDocs(q);
     if (!existing.empty) {
       console.log("Token já existe no Firestore, ignorando...");
@@ -253,7 +254,7 @@ export const disableNotifications = async () => {
     // Remove do Firestore
     const q = query(collection(db, "fcm_tokens"), where("token", "==", token));
     const snapshot = await getDocs(q);
-    
+
     const deletions = [];
     snapshot.forEach((docSnap) => {
       deletions.push(deleteDoc(docSnap.ref));

@@ -2,7 +2,21 @@
 // Componente de cabeçalho (hero) do aplicativo
 
 import React from "react";
-import { Menu, X, Home, Hospital, Info, Globe, Heart, Stethoscope, Phone, Video, Pill, Bell, BellOff } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Hospital,
+  Info,
+  Globe,
+  Heart,
+  Stethoscope,
+  Phone,
+  Video,
+  Pill,
+  Bell,
+  BellOff,
+} from "lucide-react";
 import { FACILITIES } from "../data/facilities.js";
 import { useNotificationContext } from "./NotificationProvider.js";
 
@@ -15,6 +29,8 @@ export function Header({
   setFilterType,
   totalServices,
 }) {
+  const { isGranted, isDenied, notificationsEnabled, toggleNotifications } =
+    useNotificationContext();
   const handleNavClick = (page) => {
     setActivePage(page);
     if (page === "home") {
