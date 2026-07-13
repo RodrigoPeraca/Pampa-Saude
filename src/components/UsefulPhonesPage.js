@@ -2,7 +2,7 @@
 // Componente da página de telefones úteis
 
 import React from "react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Phone } from "lucide-react";
 import { emergencyNumbers } from "../data/usefulPhones.js";
 
 // Componente da página de telefones úteis
@@ -33,6 +33,12 @@ export function UsefulPhonesPage({ setActivePage }) {
               <div className="ps-em-number">{e.number}</div>
               <div className="ps-em-name">{e.name}</div>
               <div className="ps-em-desc">{e.description}</div>
+              <div className="facility-actions ps-em-actions">
+                <a href={`tel:${e.number.replace(/\D/g, "")}`}>
+                  <Phone size={16} />
+                  Ligar
+                </a>
+              </div>
             </div>
           ))}
         </div>
