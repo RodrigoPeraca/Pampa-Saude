@@ -16,7 +16,7 @@
       "purpose": "any"
     },
     {
-      "src": "PampaSaude_redondo.png",
+      "src": "PampaSaude_redondo_1024.png",
       "type": "image/png",
       "sizes": "1024x1024",
       "purpose": "maskable"
@@ -25,7 +25,7 @@
   "start_url": "/",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#000000",
+  "theme_color": "#0b3b2e",
   "background_color": "#ffffff",
   "orientation": "portrait-primary",
   "categories": ["health", "medical", "government"], 
