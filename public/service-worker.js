@@ -2,17 +2,19 @@
 
 const CACHE_NAME = "pampa-saude";
 const OFFLINE_URL = "/index.html";
+const APP_SHELL_ASSETS = [
+  "/",
+  OFFLINE_URL,
+  "/manifest.json",
+  "/PampaSaude_redondo_192.png",
+  "/PampaSaude_redondo.png",
+  "/PampaSaude_redondo_1024.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll([
-        "/",
-        OFFLINE_URL,
-        "/manifest.json",
-        "/PampaSaude_redondo_192.png",
-        "/PampaSaude_redondo.png",
-      ]);
+      return cache.addAll(APP_SHELL_ASSETS);
     }),
   );
   self.skipWaiting();

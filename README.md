@@ -115,6 +115,12 @@ Construido para soluções para a comunidade de bagé e desenvolvido pela equipe
 
 Este projeto é privado e não possui licença pública.
 
+## 🤖 TWA
+
+Guia prático para converter o PWA em TWA e publicar na Play Store: [TWA_SETUP.md](TWA_SETUP.md)
+
+Fluxo rápido: troque os placeholders em [TWA_SETUP.md](TWA_SETUP.md), publique o `assetlinks.json` em `https://<SEU-DOMINIO>/.well-known/assetlinks.json` e rode os comandos de Bubblewrap no computador.
+
 ## 📞 Contato
 
 Para dúvidas ou sugestões, entre em contato com o desenvolvedor.

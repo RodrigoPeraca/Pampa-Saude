@@ -2,7 +2,7 @@
 // Componente da página de serviços de saúde
 
 import React from 'react';
-import { TYPE_LABELS } from '../data/constants.js';
+import { TYPE_DESCRIPTIONS, TYPE_LABELS } from '../data/constants.js';
 
 export function ServicesPage({ setFilterType, setActivePage }) {
   return (
@@ -31,7 +31,10 @@ export function ServicesPage({ setFilterType, setActivePage }) {
                 setActivePage("home");
               }}
             >
-              {label}
+              <span className="services-card-title">{label}</span>
+              <span className="services-card-description">
+                {TYPE_DESCRIPTIONS[type]}
+              </span>
             </button>
           ))}
 
@@ -43,7 +46,10 @@ export function ServicesPage({ setFilterType, setActivePage }) {
             setActivePage("home");
           }}
         >
-          Todas as unidades
+          <span className="services-card-title">Todas as unidades</span>
+          <span className="services-card-description">
+            {TYPE_DESCRIPTIONS.all}
+          </span>
         </button>
       </div>
     </section>
