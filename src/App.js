@@ -101,9 +101,9 @@ function AppContent({
       ) : activePage === "farmacias" ? (
         <Pharmacy setActivePage={setActivePage} />
       ) : activePage === "foreigners" ? (
-        <ForeignersPage setActivePage={setActivePage} />
+        < AboutPage setActivePage={setActivePage} />
       ) : activePage === "sobre" ? (
-        <AboutPage setActivePage={setActivePage} />
+        <ForeignersPage setActivePage={setActivePage} />
       ) : activePage === "foreigners" ? (
         <ForeignersPage setActivePage={setActivePage} />
       ) : activePage === "campanhas" ? (
