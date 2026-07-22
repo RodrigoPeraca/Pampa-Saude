@@ -1,6 +1,8 @@
+// src/firebase/firebase.js
 import { initializeApp } from "firebase/app";
 import { getMessaging, isSupported } from "firebase/messaging";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import {
   initializeAppCheck,
   ReCaptchaV3Provider,
@@ -19,22 +21,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-window.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-// Inicializa o App Check
+// App Check
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider(process.env.REACT_APP_RECAPTCHA_SITE_KEY),
   isTokenAutoRefreshEnabled: true,
 });
 
 export const db = getFirestore(app);
-// aguarda o App Check estar pronto antes de usar o Firestore
+export const storage = getStorage(app); // ← Storage para upload de imagens
+
+// Promise que resolve quando o primeiro token do App Check estiver pronto
 export const appCheckReady = getAppCheckToken(appCheck)
-  .then(() => {
-    console.log("App Check pronto");
-  })
-  .catch((err) => {
-    console.error("Erro ao obter token do App Check:", err);
-  });
+  .then(() => console.log("App Check pronto"))
+  .catch((err) => console.error("Erro ao obter token do App Check:", err));
 
 let messaging = null;
 
@@ -42,8 +41,6 @@ const initMessaging = async () => {
   const supported = await isSupported();
   if (supported && "serviceWorker" in navigator) {
     messaging = getMessaging(app);
-
-    // Aguarda o service worker já registrado pelo serviceWorkerRegistration.js
     const registration = await navigator.serviceWorker.ready;
     messaging.swRegistration = registration;
   }
