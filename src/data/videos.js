@@ -50,6 +50,13 @@ export const videos = [
     description: "Dicas para cuidar da saúde masculina em todas as fases da vida",
     duration: "5:30",
     category: "Tutorial",
-    youtubeId: "",
+    youtubeId: "M8MaKpFiWGM",
+  },
+   {
+    title: "Pressão alta (hipertensão arterial)",
+    description: "Dicas para controlar a pressão arterial e prevenir complicações",
+    duration: "3:13",
+    category: "Tutorial",
+    youtubeId: "K7QnivczWVo",
   }
 ];

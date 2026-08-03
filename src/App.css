@@ -1178,6 +1178,43 @@
   color: rgba(31, 41, 55, 0.82);
 }
 
+.ps-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.ps-em-card {
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(11, 59, 46, 0.08);
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(16, 61, 53, 0.08);
+}
+
+.ps-em-card-image {
+  background: linear-gradient(180deg, #f7fbff 0%, #eef7f9 100%);
+  padding: 12px;
+}
+
+.ps-em-card-image img {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.ps-em-card h4 {
+  margin: 0;
+  padding: 1rem 1rem 0;
+}
+
+.ps-em-card .ps-steps {
+  padding: 0 1rem 1rem 1.15rem;
+}
+
 .ps-alert {
   border: 1px solid rgba(220, 38, 38, 0.2);
   background: rgba(220, 38, 38, 0.07);
