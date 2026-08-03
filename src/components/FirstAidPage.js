@@ -42,6 +42,9 @@ export function FirstAidPage({ setActivePage }) {
         <div className="ps-cards">
           {emergencies.map((e, idx) => (
             <div key={idx} className="ps-em-card">
+              <div className="ps-em-card-image">
+                <img src={e.image} alt={e.imageAlt || e.title} loading="lazy" />
+              </div>
               <h4>{e.title}</h4>
               <ol className="ps-steps">
                 {e.steps.map((s, i) => (

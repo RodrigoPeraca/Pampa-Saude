@@ -33,11 +33,12 @@ function App() {
   const [activeInfoTab, setActiveInfoTab] = useState("devs");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Detecta rota /mensagem na URL
-  const [activePage, setActivePage] = useState( // 'home' | 'servicos' |'sobre'|'foreigners'
-    window.location.pathname === "/mensagem" ? "mensagem" : "home"
+  const [activePage, setActivePage] = useState(
+    // 'home' | 'servicos' |'sobre'|'foreigners'
+    window.location.pathname === "/mensagem" ? "mensagem" : "home",
   );
   // Hook personalizado para filtragem
-  const { filteredFacilities, totalServices} = useFacilities(
+  const { filteredFacilities, totalServices } = useFacilities(
     searchTerm,
     filterType,
   );
@@ -101,11 +102,9 @@ function AppContent({
       ) : activePage === "farmacias" ? (
         <Pharmacy setActivePage={setActivePage} />
       ) : activePage === "foreigners" ? (
-        < AboutPage setActivePage={setActivePage} />
+        <ForeignersPage setActivePage={setActivePage} />
       ) : activePage === "sobre" ? (
-        <ForeignersPage setActivePage={setActivePage} />
-      ) : activePage === "foreigners" ? (
-        <ForeignersPage setActivePage={setActivePage} />
+        <AboutPage setActivePage={setActivePage} />
       ) : activePage === "campanhas" ? (
         <HealthCampaignsPage setActivePage={setActivePage} />
       ) : activePage === "primeiros-socorros" ? (
@@ -118,7 +117,7 @@ function AppContent({
         <VideosPage setActivePage={setActivePage} />
       ) : activePage === "mensagem" ? (
         <AdminPage />
-      ) : (  
+      ) : (
         <>
           <SearchPanel
             searchTerm={searchTerm}
@@ -135,7 +134,7 @@ function AppContent({
           />
 
           <InstitutionLogos />
-          
+
           <InfoTabs
             activeInfoTab={activeInfoTab}
             setActiveInfoTab={setActiveInfoTab}

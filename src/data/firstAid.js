@@ -2,13 +2,11 @@
 // Dados de primeiros socorros para exibição no aplicativo
 // First Aid Emergencies Data
 
-import { Heart, Flame, Zap, Droplets } from "lucide-react";
-
 export const emergencies = [
   {
     title: "Parada Cardíaca",
-    icon: Heart,
-    color: "red",
+    image: "/parada_cardiaca.png",
+    imageAlt: "Ilustração de primeiros socorros para parada cardíaca",
     steps: [
       "Ligue imediatamente 192 (SAMU)",
       "Inicie compressões torácicas (100-120/min)",
@@ -17,8 +15,8 @@ export const emergencies = [
   },
   {
     title: "Queimaduras",
-    icon: Flame,
-    color: "orange",
+    image: "/queimadura.png",
+    imageAlt: "Ilustração de primeiros socorros para queimaduras",
     steps: [
       "Resfrie a área com água corrente por 10-20 minutos",
       "Não use gelo diretamente na pele",
@@ -27,8 +25,8 @@ export const emergencies = [
   },
   {
     title: "Choque Elétrico",
-    icon: Zap,
-    color: "yellow",
+    image: "/choque_eletrico.png",
+    imageAlt: "Ilustração de primeiros socorros para choque elétrico",
     steps: [
       "Desligue a fonte de energia se possível",
       "Não toque na vítima se ainda houver corrente",
@@ -37,8 +35,8 @@ export const emergencies = [
   },
   {
     title: "Hemorragia",
-    icon: Droplets,
-    color: "blue",
+    image: "/hemorragia.png",
+    imageAlt: "Ilustração de primeiros socorros para hemorragia",
     steps: [
       "Faça compressão direta no local com pano limpo",
       "Mantenha o membro elevado (se possível)",
