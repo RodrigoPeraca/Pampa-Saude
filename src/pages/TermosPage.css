@@ -1,0 +1,242 @@
+/* src/pages/TermosPage.css */
+
+.termos-hero {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.termos-hero h2 {
+  margin: 12px 0 6px;
+  font-size: 1.5rem;
+}
+
+.termos-hero p {
+  margin: 0;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
+
+/* Container principal */
+.termos-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Seções */
+.termos-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+}
+
+.termos-section p {
+  color: #374151;
+  line-height: 1.7;
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+}
+
+.termos-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Títulos */
+.termos-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0b3b2e;
+  margin: 0 0 16px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e5f0eb;
+}
+
+.termos-subtitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a5c45;
+  margin: 20px 0 10px 0;
+}
+
+/* Destaque verde */
+.termos-destaque {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.termos-destaque-verde {
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+}
+
+.termos-destaque-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.termos-destaque strong {
+  display: block;
+  color: #1a5c45;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.termos-destaque p {
+  margin: 0;
+  color: #374151;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Grid de info cards */
+.termos-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+@media (max-width: 480px) {
+  .termos-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.termos-info-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.termos-info-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0b3b2e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.termos-info-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* Lista com ícone */
+.termos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.termos-lista-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.termos-lista-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.termos-lista-item strong {
+  display: block;
+  color: #1f2937;
+  margin-bottom: 4px;
+  font-size: 0.93rem;
+}
+
+.termos-lista-item p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Lista simples */
+.termos-ul {
+  margin: 10px 0 0 0;
+  padding-left: 20px;
+  color: #374151;
+  font-size: 0.93rem;
+  line-height: 1.8;
+}
+
+.termos-ul li {
+  margin-bottom: 4px;
+}
+
+/* Contato */
+.termos-contato {
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.termos-contato p {
+  margin: 0 0 8px 0;
+  font-size: 0.93rem;
+  color: #1f2937;
+}
+
+.termos-contato p:last-child {
+  margin-bottom: 0;
+}
+
+.termos-contato a {
+  color: #1a5c45;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.termos-contato a:hover {
+  text-decoration: underline;
+}
+
+/* Link do rodapé */
+.app-footer-terms {
+  margin-top: 8px;
+}
+
+.app-footer-terms-link {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.7;
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.app-footer-terms-link:hover {
+  opacity: 1;
+}

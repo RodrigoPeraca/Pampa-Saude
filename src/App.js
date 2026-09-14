@@ -21,6 +21,8 @@ import { HealthCampaignsPage } from "./components/HealthCampaignsPage.js";
 import { FirstAidPage } from "./components/FirstAidPage.js";
 import { UsefulPhonesPage } from "./components/UsefulPhonesPage.js";
 import { VideosPage } from "./components/VideosPage.js";
+import { Footer } from "./components/Footer.js";
+import { TermosPage } from "./pages/TermosPage.js";
 import Pharmacy from "./components/Pharmacy.js";
 // Imports do hook
 import { useFacilities } from "./hooks/useFacilities.js";
@@ -35,7 +37,11 @@ function App() {
   // Detecta rota /mensagem na URL
   const [activePage, setActivePage] = useState(
     // 'home' | 'servicos' |'sobre'|'foreigners'
-    window.location.pathname === "/mensagem" ? "mensagem" : "home",
+    window.location.pathname === "/mensagem"
+      ? "mensagem"
+      : window.location.pathname === "/termos"
+        ? "termos"
+        : "home",
   );
   // Hook personalizado para filtragem
   const { filteredFacilities, totalServices } = useFacilities(
@@ -117,6 +123,8 @@ function AppContent({
         <VideosPage setActivePage={setActivePage} />
       ) : activePage === "mensagem" ? (
         <AdminPage />
+      ) : activePage === "termos" ? (
+        <TermosPage setActivePage={setActivePage} />
       ) : (
         <>
           <SearchPanel
@@ -140,16 +148,7 @@ function AppContent({
             setActiveInfoTab={setActiveInfoTab}
           />
 
-          <footer className="app-footer">
-            <p>
-              Pampa Saúde · Bagé/RS · Conexão direta com a Universidade Federal
-              do Pampa e a Engenharia de Computação.
-            </p>
-            <p>
-              Dados compilados para fins de consulta rápida. Confirme horários
-              diretamente com a unidade.
-            </p>
-          </footer>
+          <Footer setActivePage={setActivePage} />
         </>
       )}
     </div>
