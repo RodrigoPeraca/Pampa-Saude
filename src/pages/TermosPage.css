@@ -219,6 +219,27 @@
   text-decoration: underline;
 }
 
+.termos-feedback {
+  background: #fffaf0;
+  border: 1px solid #f6d38d;
+}
+
+.termos-feedback p {
+  margin-bottom: 10px;
+}
+
+.termos-feedback-link {
+  display: inline-block;
+  color: #0b3b2e;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.termos-feedback-link:hover {
+  text-decoration: underline;
+}
+
 /* Link do rodapé */
 .app-footer-terms {
   margin-top: 8px;

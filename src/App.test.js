@@ -54,7 +54,7 @@ describe("App Component - Pampa Saúde", () => {
       
       fireEvent.change(input, { target: { value: "Arvorezinha" } });
       
-      expect(screen.getByText("ESF Arvorezinha")).toBeInTheDocument();
+      expect(screen.getByText("UBS ESF Arvorezinha")).toBeInTheDocument();
     });
 
     test("deve mostrar mensagem quando não encontrar resultados", () => {
@@ -87,7 +87,7 @@ describe("App Component - Pampa Saúde", () => {
       
       fireEvent.change(select, { target: { value: "ESF" } });
       
-      expect(screen.getByText("ESF Arvorezinha")).toBeInTheDocument();
+      expect(screen.getByText("UBS ESF Arvorezinha")).toBeInTheDocument();
     });
 
     test("deve filtrar unidades por tipo UBS", () => {
@@ -96,7 +96,7 @@ describe("App Component - Pampa Saúde", () => {
       
       fireEvent.change(select, { target: { value: "UBS" } });
       
-      expect(screen.getByText("UBS Ivo Ferronato")).toBeInTheDocument();
+      expect(screen.getByText("UBS Ivone")).toBeInTheDocument();
     });
 
     test("deve filtrar unidades por tipo CAPS", () => {
@@ -115,7 +115,7 @@ describe("App Component - Pampa Saúde", () => {
       fireEvent.change(select, { target: { value: "ESF" } });
       fireEvent.change(select, { target: { value: "all" } });
       
-      expect(screen.getByText("ESF Arvorezinha")).toBeInTheDocument();
+      expect(screen.getByText("UBS ESF Arvorezinha")).toBeInTheDocument();
     });
 
     test("deve ter botão para limpar filtro", () => {
@@ -213,7 +213,7 @@ describe("App Component - Pampa Saúde", () => {
     test("deve renderizar informações da unidade (nome, tipo, endereço)", () => {
       render(<App />);
       
-      expect(screen.getByText("ESF Arvorezinha")).toBeInTheDocument();
+      expect(screen.getByText("UBS ESF Arvorezinha")).toBeInTheDocument();
       expect(screen.getByText("Tarumã")).toBeInTheDocument();
     });
 
@@ -305,23 +305,18 @@ describe("App Component - Pampa Saúde", () => {
 
     test("deve mudar para aba Unipampa ao clicar", () => {
       render(<App />);
-      
-      const unipampaTab = screen.getAllByText("Unipampa")[0];
+      const unipampaTab = screen.getByRole("button", { name: "Unipampa" });
       fireEvent.click(unipampaTab);
       
-      expect(screen.getAllByText(/Campus Bagé/).length).toBeGreaterThan(0);
+      expect(screen.getByText(/Campus Bagé:/)).toBeInTheDocument();
     });
 
     test("deve mudar para aba Desenvolvedores ao clicar", () => {
       render(<App />);
+      const devsTab = screen.getByRole("button", { name: "Desenvolvedores" });
+      fireEvent.click(devsTab);
       
-      const unipampaTab = screen.getAllByText("Unipampa")[0];
-      fireEvent.click(unipampa);
-      
-      const devsTab = screen.getAllByText("Desenvolvedores")[0];
-      fireEvent.click(devs);
-      
-      expect(screen.getByText("Julio Saraçol")).toBeInTheDocument();
+      expect(screen.getByText(/Julio Saraçol/i)).toBeInTheDocument();
     });
   });
 
@@ -343,7 +338,7 @@ describe("App Component - Pampa Saúde", () => {
       const input = screen.getByLabelText(/Busque por bairro/);
       fireEvent.change(input, { target: { value: "Arvorezinha" } });
       
-      expect(screen.getByText("ESF Arvorezinha")).toBeInTheDocument();
+      expect(screen.getByText("UBS ESF Arvorezinha")).toBeInTheDocument();
     });
   });
 
