@@ -332,6 +332,21 @@
   color: #3a4c46;
 }
 
+.app-footer-report {
+  margin-top: 0.2rem;
+}
+
+.app-footer-report-link {
+  color: #0b3b2e;
+  font-weight: 600;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.app-footer-report-link:hover {
+  opacity: 1;
+}
+
 /* TABLET */
 
 @media (min-width: 768px) {

@@ -23,6 +23,16 @@ export function Footer({ setActivePage }) {
           Termos de Uso e Privacidade
         </button>
       </p>
+      <p className="app-footer-report">
+        <a
+          href="https://forms.gle/Hxghqb9LtEsZYx5U9"
+          target="_blank"
+          rel="noreferrer"
+          className="app-footer-report-link"
+        >
+          Comunicar informação incorreta
+        </a>
+      </p>
     </footer>
   );
 }

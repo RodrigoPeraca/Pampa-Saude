@@ -293,6 +293,8 @@ export function TermosPage({ setActivePage }) {
           </div>
         </section>
 
+       
+
       </div>
 
       <footer className="app-footer">
