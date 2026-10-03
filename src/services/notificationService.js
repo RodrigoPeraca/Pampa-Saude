@@ -1,11 +1,8 @@
 // src/services/notificationService.js
 // Serviço centralizador para Firebase Cloud Messaging
 import {
-  collection,
-  addDoc,
-  query,
-  where,
-  getDocs,
+  doc,
+  setDoc,
   deleteDoc,
 } from "firebase/firestore";
 import { messaging, db, appCheckReady } from "../firebase/firebase";
@@ -218,27 +215,22 @@ export const sendTokenToBackend = async (
 let isSavingToken = false;
 
 export const saveTokenToFirestore = async (token) => {
-  // Se já está salvando, ignora
+  if (!token) return;
+
+  // Mantém a proteção contra múltiplas gravações ao mesmo tempo
   if (isSavingToken) return;
   isSavingToken = true;
 
   try {
     await appCheckReady;
 
-    const q = query(collection(db, "fcm_tokens"), where("token", "==", token));
-    const existing = await getDocs(q);
-    if (!existing.empty) {
-      console.log("Token já existe no Firestore, ignorando...");
-      return;
-    }
-
-    await addDoc(collection(db, "fcm_tokens"), {
+    await setDoc(doc(db, "fcm_tokens", token), {
       token,
       platform: "web",
       createdAt: new Date(),
     });
 
-    console.log("Token salvo no Firestore");
+    console.log("Token salvo/atualizado no Firestore");
   } catch (error) {
     console.error("Erro ao salvar token:", error);
   } finally {
@@ -251,17 +243,8 @@ export const disableNotifications = async () => {
     const token = getStoredFCMToken();
     if (!token) return;
 
-    // Remove do Firestore
-    const q = query(collection(db, "fcm_tokens"), where("token", "==", token));
-    const snapshot = await getDocs(q);
+    await deleteDoc(doc(db, "fcm_tokens", token));
 
-    const deletions = [];
-    snapshot.forEach((docSnap) => {
-      deletions.push(deleteDoc(docSnap.ref));
-    });
-    await Promise.all(deletions);
-
-    // Limpa localStorage e localmente
     clearFCMToken();
     localStorage.setItem("notifications_enabled", "false");
 
