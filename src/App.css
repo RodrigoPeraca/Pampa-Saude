@@ -1313,6 +1313,11 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .ps-em-badge {
@@ -1372,7 +1377,7 @@
 }
 
 .ps-em-actions {
-  margin-top: 10px;
+  margin-top: auto;
 }
 
 .ps-select {
