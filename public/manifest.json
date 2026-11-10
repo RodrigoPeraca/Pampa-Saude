@@ -1,0 +1,49 @@
+{
+  "short_name": "Pampa Saúde",
+  "name": "Pampa Saúde - Tecnologia 1",
+  "description": "Carta de serviços de saúde de Bagé, RS - Brasil",
+  "icons": [
+    {
+      "src": "PampaSaude_redondo_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "PampaSaude_redondo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "PampaSaude_redondo_1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#0b3b2e",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "categories": ["health", "medical", "government"], 
+  "shortcuts": [  
+    {
+      "name": "Buscar Unidades",
+      "short_name": "Buscar",
+      "description": "Encontre unidades de saúde",
+      "url": "/",
+      "icons": [{ "src": "PampaSaude_redondo_192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
