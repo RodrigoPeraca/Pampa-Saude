@@ -24,6 +24,7 @@ const SINONIMOS = [
   { termo: "psicologo", equivalente: "saude mental" },
   { termo: "psiquiatra", equivalente: "saude mental" },
   { termo: "fisioterapeuta", equivalente: "fisioterapia" },
+  { termo: "nutricionista", equivalente: "nutricao" },
 ];
 
 export function useFacilities(searchTerm, filterType) {
