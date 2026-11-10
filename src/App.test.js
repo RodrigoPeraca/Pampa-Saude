@@ -214,7 +214,7 @@ describe("App Component - Pampa Saúde", () => {
       render(<App />);
       
       expect(screen.getByText("UBS ESF Arvorezinha")).toBeInTheDocument();
-      expect(screen.getByText("Tarumã")).toBeInTheDocument();
+      expect(screen.getByText("Vicente Gallo Sobrinho")).toBeInTheDocument();
     });
 
     test("deve renderizar botão Ver no Maps", () => {
