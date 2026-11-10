@@ -16,7 +16,7 @@ export function FacilityCard({ facility }) {
           </p>
         </div>
         <span className="facility-badge">
-          {TYPE_LABELS[facility.type]}
+          {facility.typeDescription || TYPE_LABELS[facility.type]}
         </span>
       </header>
 
@@ -48,7 +48,7 @@ export function FacilityCard({ facility }) {
         >
           Ver no Maps
         </a>
-        <a href={`tel:${facility.phone.replace(/\D/g, "")}`}>Ligar</a>
+        <a href={`tel:${(facility.primaryPhone || facility.phone).replace(/\D/g, "")}`}>Ligar</a>
       </div>
     </article>
   );
